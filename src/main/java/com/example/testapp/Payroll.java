@@ -115,57 +115,6 @@ public class Payroll {
 
 		for(int i=0; i<input.size();i++) {
 			Payroll sample = new Payroll();
-//			switch (input.get(i).getPaymentMonth()) {
-//			case 0:
-//				  sample.setFromDate("01 January");
-//				  sample.setToDate("31 January");
-//			    break;  
-//			case 1:
-//				  sample.setFromDate("01 Febuary");
-//				  sample.setToDate("28 Febuary");
-//			    break;
-//			  case 2:
-//				  sample.setFromDate("01 March");
-//				  sample.setToDate("31 March");
-//			    break;
-//			  case 3:
-//				  sample.setFromDate("01 April");
-//				  sample.setToDate("30 April");
-//			    break;
-//			  case 4:
-//				  sample.setFromDate("01 May");
-//				  sample.setToDate("31 May");
-//			    break;
-//			  case 5:
-//				  sample.setFromDate("01 June");
-//				  sample.setToDate("30 June");
-//			    break;
-//			  case 6:
-//				  sample.setFromDate("01 July");
-//				  sample.setToDate("31 July");
-//			    break;
-//			  case 7:
-//				  sample.setFromDate("01 August");
-//				  sample.setToDate("31 August");
-//			    break;
-//			  case 8:
-//				  sample.setFromDate("01 September");
-//				  sample.setToDate("30 September");
-//			    break;
-//			  case 9:
-//				  sample.setFromDate("01 October");
-//				  sample.setToDate("31 October");
-//			    break;
-//			  case 10:
-//				  sample.setFromDate("01 November");
-//				  sample.setToDate("30 November");
-//			    break;
-//			  case 11:
-//				  sample.setFromDate("01 December");
-//				  sample.setToDate("28 December");
-//			    break;
-//			}//
-			
 			try {
 				int days = getNumberOfDaysInMonth(2022, input.get(i).getPaymentMonth()+1);
 				sample.setFromDate("01"+" "+new DateFormatSymbols().getMonths()[input.get(i).getPaymentMonth()]);
