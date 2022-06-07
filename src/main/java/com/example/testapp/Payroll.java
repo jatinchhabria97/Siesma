@@ -1,6 +1,10 @@
 package com.example.testapp;
 import java.util.ArrayList;
+import java.time.Month;
 import java.util.List;
+import java.time.YearMonth;
+
+import java.text.DateFormatSymbols;
 
 import org.springframework.stereotype.Service;
 
@@ -111,55 +115,64 @@ public class Payroll {
 
 		for(int i=0; i<input.size();i++) {
 			Payroll sample = new Payroll();
-			switch (input.get(i).getPaymentMonth()) {
-			case 0:
-				  sample.setFromDate("01 January");
-				  sample.setToDate("31 January");
-			    break;  
-			case 1:
-				  sample.setFromDate("01 Febuary");
-				  sample.setToDate("28 Febuary");
-			    break;
-			  case 2:
-				  sample.setFromDate("01 March");
-				  sample.setToDate("31 March");
-			    break;
-			  case 3:
-				  sample.setFromDate("01 April");
-				  sample.setToDate("30 April");
-			    break;
-			  case 4:
-				  sample.setFromDate("01 May");
-				  sample.setToDate("31 May");
-			    break;
-			  case 5:
-				  sample.setFromDate("01 June");
-				  sample.setToDate("30 June");
-			    break;
-			  case 6:
-				  sample.setFromDate("01 July");
-				  sample.setToDate("31 July");
-			    break;
-			  case 7:
-				  sample.setFromDate("01 August");
-				  sample.setToDate("31 August");
-			    break;
-			  case 8:
-				  sample.setFromDate("01 September");
-				  sample.setToDate("30 September");
-			    break;
-			  case 9:
-				  sample.setFromDate("01 October");
-				  sample.setToDate("31 October");
-			    break;
-			  case 10:
-				  sample.setFromDate("01 November");
-				  sample.setToDate("30 November");
-			    break;
-			  case 11:
-				  sample.setFromDate("01 December");
-				  sample.setToDate("28 December");
-			    break;
+//			switch (input.get(i).getPaymentMonth()) {
+//			case 0:
+//				  sample.setFromDate("01 January");
+//				  sample.setToDate("31 January");
+//			    break;  
+//			case 1:
+//				  sample.setFromDate("01 Febuary");
+//				  sample.setToDate("28 Febuary");
+//			    break;
+//			  case 2:
+//				  sample.setFromDate("01 March");
+//				  sample.setToDate("31 March");
+//			    break;
+//			  case 3:
+//				  sample.setFromDate("01 April");
+//				  sample.setToDate("30 April");
+//			    break;
+//			  case 4:
+//				  sample.setFromDate("01 May");
+//				  sample.setToDate("31 May");
+//			    break;
+//			  case 5:
+//				  sample.setFromDate("01 June");
+//				  sample.setToDate("30 June");
+//			    break;
+//			  case 6:
+//				  sample.setFromDate("01 July");
+//				  sample.setToDate("31 July");
+//			    break;
+//			  case 7:
+//				  sample.setFromDate("01 August");
+//				  sample.setToDate("31 August");
+//			    break;
+//			  case 8:
+//				  sample.setFromDate("01 September");
+//				  sample.setToDate("30 September");
+//			    break;
+//			  case 9:
+//				  sample.setFromDate("01 October");
+//				  sample.setToDate("31 October");
+//			    break;
+//			  case 10:
+//				  sample.setFromDate("01 November");
+//				  sample.setToDate("30 November");
+//			    break;
+//			  case 11:
+//				  sample.setFromDate("01 December");
+//				  sample.setToDate("28 December");
+//			    break;
+//			}//
+			
+			try {
+				int days = getNumberOfDaysInMonth(2022, input.get(i).getPaymentMonth()+1);
+				sample.setFromDate("01"+" "+new DateFormatSymbols().getMonths()[input.get(i).getPaymentMonth()]);
+				sample.setToDate(days+" "+new DateFormatSymbols().getMonths()[input.get(i).getPaymentMonth()]);
+			}
+			catch(Exception E) {
+				throw new ApiCustomException("A month value entered is irrelavant: IT MUST BE BETWEEN 0 and 11");
 			}
 			int range = input.get(i).getAnnualSalary();
 			int temp = Math.round(range/12);
@@ -195,6 +208,13 @@ public class Payroll {
 		}
 		return payment;
 }
+	
+	public static int getNumberOfDaysInMonth(int year,int month)
+    {
+        YearMonth yearMonthObject = YearMonth.of(year, month);
+        int daysInMonth = yearMonthObject.lengthOfMonth();
+        return daysInMonth;
+    }
 
 
 
